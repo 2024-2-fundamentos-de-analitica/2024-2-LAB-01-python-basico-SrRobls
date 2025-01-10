@@ -26,3 +26,15 @@ def pregunta_04():
      ('12', 3)]
 
     """
+
+    with open('./files/input/data.csv', mode='r', encoding='utf-8') as f:
+        data = f.readlines()
+
+        meses = {line.split()[2].split('-')[1]:0 for line in data}
+
+        list(map(lambda line: meses.update({line.split()[2].split('-')[1]: meses[line.split()[2].split('-')[1]] + 1}) ,data))
+
+        return sorted(meses.items())
+    
+
+print(pregunta_04())

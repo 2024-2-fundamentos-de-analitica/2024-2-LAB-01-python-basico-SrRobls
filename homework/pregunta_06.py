@@ -26,3 +26,31 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+
+    with open('./files/input/data.csv', mode='r') as f:
+        data = f.readlines()
+
+
+        lineas = [line.split()[4].split(',') for line in data]
+
+        result = {}
+
+        for line in lineas:
+            for item in line:
+                item = item.split(':')
+                # print(item)
+                clave = item[0]
+                value = int(item[1])
+                if not clave in result:
+                    result[clave] = [value, value]
+                else:
+                    result[clave][0] = min(result[clave][0], value)
+                    result[clave][1] = max(result[clave][1], value)
+            
+
+
+
+        return sorted((r[0], r[1][0], r[1][1]) for r in result.items())
+
+
+print(pregunta_06())
